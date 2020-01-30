@@ -10,8 +10,10 @@ class card(object):
 
 
 
-class PlayerHand(object):
-    def __init__(self,file):
+
+class Player(object):
+    def __init__(self,file="Cards.txt"):
+        self.score = 0
         self.hand = []
         self.lis1 = []
         self.lis2 = []
