@@ -7,8 +7,7 @@ class card(object):
         self.image = pic
         self.value = num
 
-
-
+    
 
 class PlayerHand(object):
     def __init__(self,file):
