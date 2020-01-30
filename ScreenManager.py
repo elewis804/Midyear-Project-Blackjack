@@ -1,5 +1,5 @@
 from tkinter import *
-import StartScreen
+from StartScreen import Start
 
 class Screen_Manager(object):
     def __init__(self):
@@ -8,4 +8,9 @@ class Screen_Manager(object):
 
     def start_screen(self):
         self.root.title("Start the Game!")
-        self.currentScreen=StartScreen(self.root)
+        self.currentScreen=Start(self.root)
+
+
+
+
+
