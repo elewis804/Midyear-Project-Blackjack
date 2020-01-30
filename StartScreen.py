@@ -7,6 +7,7 @@ class Start(Frame):
         self.grid()
         self.create_widgets()
 
+
     def create_widgets(self):
       Label(self,text="Welcome to Blackjack!",fg = "green",font = 31).grid(row = 0,column = 0,sticky = N)
       Label(self,text="Made by Benen  -  Erik  -  Hayun  -  Lukas").grid(row=1,column=0,sticky=N)
