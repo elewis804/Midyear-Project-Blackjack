@@ -1,5 +1,9 @@
 from tkinter import *
 from StartScreen import Start
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97d3d2f5aa30458ba0422238438161cb8f4d26c4
 
 class Screen_Manager(object):
     def __init__(self):
@@ -20,3 +24,8 @@ def main():
     game.root.mainloop()
 
 main()
+<<<<<<< HEAD
+=======
+
+        self.currentScreen=Start(self.root)
+>>>>>>> 97d3d2f5aa30458ba0422238438161cb8f4d26c4
