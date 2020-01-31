@@ -1,5 +1,7 @@
 import random
 
+'''implement system to detect bust in screen_game'''
+
 
 class card(object):
     def __init__(self,name,num,pic):
@@ -41,12 +43,8 @@ class Player(object):
         else:
             lis = self.lis4
         x = random.choice(lis)
-        #we can use random.choice(list here) to add a random card to hand
+
         self.hand.append(x)
+        self.score += x.value
         lis.remove(x)
-
-
-
-
-
 
