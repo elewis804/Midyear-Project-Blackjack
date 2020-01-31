@@ -34,6 +34,6 @@ class ScreenGame(Frame):
 
     def turn_switch(self,to):
         '''This method will display a temporary label using time to show the turn has swtiched'''
-        Label(self,text=("Turn Switch to player", to),font=18).grid()
+        Label(self,text=("Turn Switch to player", to),font=18).grid(row=0,column=1,sticky=N)
 
 

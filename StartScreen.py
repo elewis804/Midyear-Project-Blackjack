@@ -1,7 +1,5 @@
 from tkinter import *
 
-
-
 class Start(Frame):
     def __init__(self, master, close_file):
         super(Start, self).__init__(master)
