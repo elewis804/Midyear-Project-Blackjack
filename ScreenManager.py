@@ -1,5 +1,6 @@
 from tkinter import *
 from StartScreen import Start
+from screen_game import ScreenGame
 
 class Screen_Manager(object):
     def __init__(self):
@@ -11,7 +12,7 @@ class Screen_Manager(object):
         self.currentScreen = Start(self.root, self.next_screen())
 
     def next_screen(self):
-        print("Hi")
+        self.currentScreen=ScreenGame(self.root)
 
 
 def main():
