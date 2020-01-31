@@ -1,7 +1,6 @@
 from tkinter import *
 from StartScreen import Start
 
-
 class Screen_Manager(object):
     def __init__(self):
         self.root = Tk()
