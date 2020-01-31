@@ -1,5 +1,9 @@
 from tkinter import *
 from StartScreen import Start
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd2c761463a0cc4435617c8f149734fad832668f
 
 class Screen_Manager(object):
     def __init__(self):
