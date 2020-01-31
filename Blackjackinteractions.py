@@ -7,7 +7,7 @@ class card(object):
     def __init__(self,name,num,pic):
         self.name = name
         self.image = pic
-        self.value = num
+        self.value = int(num)
 
 
 
