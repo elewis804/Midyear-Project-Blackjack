@@ -28,8 +28,7 @@ class ScreenGame(Frame):
             if self.player2.score <= 20:
                 self.player2.getRandomCard()
             else:
-                self.turn = 1
-                self.turn_switch("One")
+                self.turn = 3
 
 
     def turn_switch(self,to):
