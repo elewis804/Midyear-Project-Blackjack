@@ -2,6 +2,7 @@ from tkinter import *
 import time
 from Blackjackinteractions import Player
 
+
 class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
@@ -13,6 +14,10 @@ class ScreenGame(Frame):
 
     def create_widgets(self):
 
+        back = PhotoImage(file="Images-Blackjack/dealertable.png")
+        w = Label(self, image=back)
+        w.photo = back
+        w.grid(row=0, column=0, rowspan=5,columnspan=5)
 
         Button(self,text="Hit",command=self.Hit).grid(row=3,column=3,sticky=E)
         Button(self,text="Stay",command=self.stay).grid(row=3,column=0,sticky=W)
