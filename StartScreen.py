@@ -13,5 +13,5 @@ class Start(Frame):
         Button(self, text="Begin!", bg="green", command=self.startgame).grid(row=2, column=0, sticky=N)
 
     def startgame(self):
-        self.close_file()
 
+        self.close_file()

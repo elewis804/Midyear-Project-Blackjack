@@ -13,6 +13,7 @@ class Player(object):
         self.win = 0
         self.bust = False
         self.hand = []
+        self.p_hand = []
         self.lis1 = []
         self.lis2 = []
         self.lis3 = []
