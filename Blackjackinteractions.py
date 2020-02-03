@@ -1,5 +1,5 @@
 import random
-'''implement system to detect bust in screen_game'''
+
 
 class card(object):
     def __init__(self,name,num,pic):
