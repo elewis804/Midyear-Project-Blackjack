@@ -33,7 +33,7 @@ class ScreenGame(Frame):
                 card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand)-1].image)
                 x = Label(self, image=card1)
                 x.photo = card1
-                x.grid(row=5,column=3,rowspan=2,columnspan=2)
+                x.grid(row=5,column=5)
 
             else:
                 self.turn = 2
