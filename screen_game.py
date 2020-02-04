@@ -9,6 +9,8 @@ FIX THE IMAGES SO THEY ARE ALL SAME SIZES'''
 class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
+        self.row = 5
+        self.column = 5
         self.rounds = 0
         self.player1 = Player()
         self.player2 = Player()
@@ -124,10 +126,22 @@ class ScreenGame(Frame):
 
     def begin(self):
         self.rounds += 1
-        self.player1.getRandomCard()
-        self.player1.getRandomCard()
-        self.player2.getRandomCard()
-        self.player2.getRandomCard()
+        if self.turn == 1:
+            self.player1.getRandomCard()
+            self.player1.p_hand.append(0)
+            card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
+            self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
+            self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
+            self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+            self.player1.getRandomCard()
+            self.player1.p_hand.append(0)
+            card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
+            self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
+            self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
+            self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column+1)
+        elif self.turn == 2:
+            self.player2.getRandomCard()
+            self.player2.getRandomCard()
         self.start.destroy()
         self.h = Button(self,text="Hit",command=self.Hit)
         self.h.grid(row=2,column=14,sticky=E)
