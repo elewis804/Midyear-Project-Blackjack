@@ -10,7 +10,7 @@ class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
         self.row = 5
-        self.column = 5
+        self.column = 1
         self.rounds = 0
         self.player1 = Player()
         self.player2 = Player()
@@ -29,13 +29,26 @@ class ScreenGame(Frame):
             if self.player1.score <= 20:
                 self.player1.getRandomCard()
                 self.player1.p_hand.append(0)
-                card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand)-1].image)
-                self.player1.p_hand[len(self.player1.p_hand)-1] = Label(self, image=card1)
-                self.player1.p_hand[len(self.player1.p_hand)-1].photo = card1
-                self.player1.p_hand[len(self.player1.p_hand)-1].grid(row=5,column=5)
+                if self.column < 4:
+                    card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
+                else:
+                    self.row += 1
+                    self.column = 1
+                    self.player1.p_hand.append(0)
+                    card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
             else:
                 self.turn = 2
                 self.turn_switch(self.turn)
+                self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
+                                    font=("Arial", 30, "bold"))
+                self.start.grid(row=5, column=6)
                 self.h.destroy()
                 self.s.destroy()
                 self.player1.bust = True
@@ -43,29 +56,48 @@ class ScreenGame(Frame):
             if self.player2.score <= 20:
                 self.player2.getRandomCard()
                 self.player2.p_hand.append(0)
-                card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand)-1].image)
-                self.player2.p_hand[len(self.player2.p_hand)-1] = Label(self, image=card1)
-                self.player2.p_hand[len(self.player2.p_hand)-1].photo = card1
-                self.player2.p_hand[len(self.player2.p_hand)-1].grid(row=5,column=5)
+                if self.column < 4:
+                    card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
+                    self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
+                    self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
+                    self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
+                else:
+                    self.row += 1
+                    self.column = 1
+                    self.player1.p_hand.append(0)
+                    card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
+                    self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
             else:
                 self.turn = 3
                 self.turn_switch(self.turn)
                 self.h.destroy()
                 self.s.destroy()
+                for x in range(len(self.player2.p_hand)):
+                    self.player2.p_hand[x].destroy()
+                for x in self.player2.p_hand:
+                    self.player2.p_hand.remove(x)
                 self.player2.bust = True
 
-    def stay(self):
-        if self.turn == 1:
+    def clear_board(self):
+        if len(self.player1.p_hand) > 0:
             for x in range(len(self.player1.p_hand)):
                 self.player1.p_hand[x].destroy()
             for x in self.player1.p_hand:
                 self.player1.p_hand.remove(x)
-        elif self.turn == 2:
+        if len(self.player2.p_hand) > 0:
             for x in range(len(self.player2.p_hand)):
                 self.player2.p_hand[x].destroy()
             for x in self.player2.p_hand:
                 self.player2.p_hand.remove(x)
+
+
+
+    def stay(self):
         self.turn += 1
+        self.clear_board()
         if self.turn < 3:
             self.turn_switch(self.turn)
             self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
@@ -133,15 +165,30 @@ class ScreenGame(Frame):
             self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
             self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
             self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+            self.column += 1
             self.player1.getRandomCard()
             self.player1.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
             self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
             self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
-            self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column+1)
+            self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+            self.column += 1
         elif self.turn == 2:
+            self.clear_board()
             self.player2.getRandomCard()
+            self.player2.p_hand.append(0)
+            card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
+            self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
+            self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
+            self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
+            self.column += 1
             self.player2.getRandomCard()
+            self.player2.p_hand.append(0)
+            card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
+            self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
+            self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
+            self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
+            self.column += 1
         self.start.destroy()
         self.h = Button(self,text="Hit",command=self.Hit)
         self.h.grid(row=2,column=14,sticky=E)
