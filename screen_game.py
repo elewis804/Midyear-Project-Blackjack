@@ -9,6 +9,7 @@ FIX THE IMAGES SO THEY ARE ALL SAME SIZES'''
 class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
+        self.rounds = 0
         self.player1 = Player()
         self.player2 = Player()
         self.player1.getRandomCard()
@@ -27,7 +28,7 @@ class ScreenGame(Frame):
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
 
         self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,font=("Arial",30,"bold"))
-        self.start.grid(row=3,column=6)
+        self.start.grid(row=5,column=6)
 
 
     def Hit(self):
@@ -42,6 +43,9 @@ class ScreenGame(Frame):
             else:
                 self.turn = 2
                 self.turn_switch(self.turn)
+                self.h.destroy()
+                self.s.destroy()
+                self.player1.bust = True
         elif self.turn == 2:
             if self.player2.score <= 20:
                 self.player2.getRandomCard()
@@ -52,6 +56,10 @@ class ScreenGame(Frame):
                 self.player2.p_hand[len(self.player2.p_hand)-1].grid(row=5,column=5)
             else:
                 self.turn = 3
+                self.turn_switch(self.turn)
+                self.h.destroy()
+                self.s.destroy()
+                self.player2.bust = True
 
     def stay(self):
         if self.turn == 1:
@@ -69,15 +77,46 @@ class ScreenGame(Frame):
             self.turn_switch(self.turn)
             self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
                                 font=("Arial", 30, "bold"))
-            self.start.grid(row=3, column=6)
+            self.start.grid(row=5, column=6)
             self.h.destroy()
             self.s.destroy()
         else:
+            self.round_end()
             self.turn_switch(self.turn)
             self.h.destroy()
             self.s.destroy()
 
+    def update_score(self,wins):
+        if self.rounds > (self.player1.win + self.player2.win):
+            wins += 1
 
+
+
+    def round_end(self):
+        if self.player1.bust:
+            if self.player2.bust:
+                self.display_current = Label(self,text="Tie Round")
+                self.display_current.grid(row=13,column=7,sticky=S)
+            else:
+                self.display_current = Label(self,text="Player 2 Wins Round")
+                self.display_current.grid(row=13,column=7,sticky=S)
+                self.update_score(self.player2.win)
+        elif self.player2.bust:
+            self.display_current = Label(self,text="PLayer 1 Wins Round")
+            self.display_current.grid(row=13,column=7,sticky=S)
+            self.update_score(self.player2.win)
+        else:
+            if self.player1.score > self.player2.score:
+                self.display_current = Label(self,text="Player 1 Wins Round")
+                self.display_current.grid(row=13,column=7,sticky=S)
+                self.update_score(self.player1.win)
+            elif self.player2.score > self.player1.score:
+                self.display_current = Label(self,text="Player 2 Wins Round")
+                self.display_current.grid(row=13,column=7,sticky=S)
+                self.update_score(self.player2.win)
+            else:
+                self.display_current = Label(self,text="Tie Round")
+                self.display_current.grid(row=13,column=7,sticky=S)
 
     def turn_switch(self,to):
         '''This method will display a constant label showing whose turn it is'''
@@ -85,13 +124,30 @@ class ScreenGame(Frame):
             self.switch = Label(self,text=("Turn: Player" + str(to)),font=("Times",16,"bold"))
             self.switch.grid(row=11,column=7,sticky=S)
         else:
-            self.switch.destroy()
-            self.switch = Label(self,text=("Turn Over"),font=("Times",16,"bold"))
-            self.switch.grid(row=11,column=7,sticky=S)
+            if self.player1.win < 1 and self.player2.win < 1:
+                self.switch.destroy()
+                self.switch = Label(self,text=("Turn Over"),font=("Times",16,"bold"))
+                self.switch.grid(row=11,column=7,sticky=S)
+                self.round_end()
+                self.score_display()
+            else:
+                self.switch.destroy()
+                self.switch = Label(self, text=("Turn Over"), font=("Times", 16, "bold"))
+                self.switch.grid(row=11, column=7, sticky=S)
+                self.round_end()
+                self.score_display()
+
 
     def begin(self):
+        self.rounds += 1
         self.start.destroy()
         self.h = Button(self,text="Hit",command=self.Hit)
         self.h.grid(row=2,column=14,sticky=E)
         self.s = Button(self,text="Stay",command=self.stay)
         self.s.grid(row=2,column=0,sticky=W)
+
+    def score_display(self):
+        self.p1_wins = Label(self,text=self.player1.win,font=("Times",12))
+        self.p1_wins.grid(row=0,column=5,sticky=N)
+        self.p2_wins = Label(self,text=self.player2.win,font=("Times",12))
+        self.p2_wins.grid(row=0,column=8,sticky=N)
