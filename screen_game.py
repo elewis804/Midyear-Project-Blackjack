@@ -125,7 +125,15 @@ class ScreenGame(Frame):
     def begin(self):
         self.rounds += 1
         self.player1.getRandomCard()
+        card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand)-1].image)
+        self.player1.p_hand[len(self.player1.p_hand)-1] = Label(self, image=card1)
+        self.player1.p_hand[len(self.player1.p_hand)-1].photo = card1
+        self.player1.p_hand[len(self.player1.p_hand)-1].grid(row=5,column=5)
         self.player1.getRandomCard()
+        card2 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand)-1].image)
+        self.player1.p_hand[len(self.player1.p_hand)-1] = Label(self, image=card2)
+        self.player1.p_hand[len(self.player1.p_hand)-1].photo = card2
+        self.player1.p_hand[len(self.player1.p_hand)-1].grid(row=6,column=6)
         self.player2.getRandomCard()
         self.player2.getRandomCard()
         self.start.destroy()
