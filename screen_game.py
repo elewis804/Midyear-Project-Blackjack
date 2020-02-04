@@ -12,21 +12,12 @@ class ScreenGame(Frame):
         self.rounds = 0
         self.player1 = Player()
         self.player2 = Player()
-        self.player1.getRandomCard()
-        self.player1.getRandomCard()
-        self.player2.getRandomCard()
-        self.player2.getRandomCard()
         self.turn = 1
         self.grid()
-        self.create_widgets()
-
-    def create_widgets(self):
-
         back = PhotoImage(file="Images-Blackjack/dealertable.png")
         w = Label(self, image=back)
         w.photo = back
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
-
         self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,font=("Arial",30,"bold"))
         self.start.grid(row=5,column=6)
 
@@ -91,7 +82,6 @@ class ScreenGame(Frame):
             wins += 1
 
 
-
     def round_end(self):
         if self.player1.bust:
             if self.player2.bust:
@@ -124,22 +114,20 @@ class ScreenGame(Frame):
             self.switch = Label(self,text=("Turn: Player" + str(to)),font=("Times",16,"bold"))
             self.switch.grid(row=11,column=7,sticky=S)
         else:
-            if self.player1.win < 1 and self.player2.win < 1:
-                self.switch.destroy()
-                self.switch = Label(self,text=("Turn Over"),font=("Times",16,"bold"))
-                self.switch.grid(row=11,column=7,sticky=S)
-                self.round_end()
-                self.score_display()
-            else:
-                self.switch.destroy()
-                self.switch = Label(self, text=("Turn Over"), font=("Times", 16, "bold"))
-                self.switch.grid(row=11, column=7, sticky=S)
-                self.round_end()
-                self.score_display()
+            self.switch.destroy()
+            self.switch = Label(self,text=("Turn Over"),font=("Times",16,"bold"))
+            self.switch.grid(row=11,column=7,sticky=S)
+            self.round_end()
+            self.score_display()
+
 
 
     def begin(self):
         self.rounds += 1
+        self.player1.getRandomCard()
+        self.player1.getRandomCard()
+        self.player2.getRandomCard()
+        self.player2.getRandomCard()
         self.start.destroy()
         self.h = Button(self,text="Hit",command=self.Hit)
         self.h.grid(row=2,column=14,sticky=E)
