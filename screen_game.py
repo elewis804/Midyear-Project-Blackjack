@@ -12,10 +12,6 @@ class ScreenGame(Frame):
         self.rounds = 0
         self.player1 = Player()
         self.player2 = Player()
-        self.player1.getRandomCard()
-        self.player1.getRandomCard()
-        self.player2.getRandomCard()
-        self.player2.getRandomCard()
         self.turn = 1
         self.grid()
         self.create_widgets()
@@ -145,6 +141,12 @@ class ScreenGame(Frame):
         self.h.grid(row=2,column=14,sticky=E)
         self.s = Button(self,text="Stay",command=self.stay)
         self.s.grid(row=2,column=0,sticky=W)
+        self.player1.getRandomCard()
+        self.player1.p_hand.append(0)
+        card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand)-1].image)
+        self.player1.p_hand[len(self.player1.p_hand)-1] = Label(self, image=card1)
+        self.player1.p_hand[len(self.player1.p_hand)-1].photo = card1
+        self.player1.p_hand[len(self.player1.p_hand)-1].grid(row=5,column=5)
 
     def score_display(self):
         self.p1_wins = Label(self,text=self.player1.win,font=("Times",12))
