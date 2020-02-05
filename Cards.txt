@@ -5,7 +5,7 @@ Five,5,Five.png
 Six,6,Six.png
 Seven,7,Seven.png
 Eight,8,Eight.png
-Nince,9,Nine.png
+Nine,9,Nine.png
 Ten,10,Ten.png
 Jack,10,Jack.png
 Queen,10,Queen.png
