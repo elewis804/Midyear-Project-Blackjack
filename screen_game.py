@@ -51,7 +51,7 @@ class ScreenGame(Frame):
                 self.clear_board()
                 self.cleared = True
                 self.turn_switch(self.turn)
-                self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
+                self.start = Button(self, text="Player " + str(self.turn) + " start turn", bg ="sky blue",command=self.begin,
                                     font=("Arial", 30, "bold"))
                 self.start.grid(row=5, column=6)
                 self.h.destroy()
@@ -136,7 +136,7 @@ class ScreenGame(Frame):
     def round_end(self):
         if self.player1.bust:
             if self.player2.bust:
-                self.display_current = Label(self,text="Tie Round",bg="orchid 2")
+                self.display_current = Label(self,text="Tie Round",bg="orchid2",font =14)
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
             else:
@@ -161,7 +161,7 @@ class ScreenGame(Frame):
                 if self.rounds > self.player1.win + self.player2.win - self.ties:
                     self.player2.win += 1
             else:
-                self.display_current = Label(self,text="Tie Round",bg ="orchid")
+                self.display_current = Label(self,text="Tie Round",bg ="orchid2")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
         self.score_display()
@@ -172,7 +172,7 @@ class ScreenGame(Frame):
         self.player1.bust = False
         self.player2.bust = False
         self.end = True
-        self.start = Button(self, text="Player " + str(self.turn) + "Start turn",bg="indian red",command=self.begin,
+        self.start = Button(self, text="Player " + str(self.turn)+" start turn",bg="indian red",command=self.begin,
                             font=("Arial", 30, "bold"))
         if self.turn == 2:
             self.start["bg"] = "sky blue"
