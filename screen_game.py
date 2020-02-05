@@ -3,7 +3,7 @@ import time
 from Blackjackinteractions import Player
 
 '''TO DO:
-Fix Round over not disappearing'''
+'''
 class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
