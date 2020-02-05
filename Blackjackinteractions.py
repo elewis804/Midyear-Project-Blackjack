@@ -47,6 +47,14 @@ class Player(object):
             else:
                 x.value = 11
         self.hand.append(x)
+        for z in range(len(self.hand)):
+            if self.hand[z].name == "Ace":
+                if self.score + 11 > 21:
+                    self.hand[z].value = 1
+                    x.value = 1
+                else:
+                    self.hand[z].value = 11
+                    x.value = 11
         self.score += x.value
         lis.remove(x)
         if self.score > 21:

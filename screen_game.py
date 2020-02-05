@@ -190,6 +190,9 @@ class ScreenGame(Frame):
             self.round_end()
 
     def begin(self):
+        if self.rounds > 1:
+            if self.turn == 1:
+                self.switch["text"] = None
         if self.turn == 1:
             self.rounds += 1
             for x in self.player1.hand:
@@ -254,3 +257,7 @@ class ScreenGame(Frame):
         self.p1_wins.grid(row=0,column=5,sticky=N)
         self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
         self.p2_wins.grid(row=0,column=8,sticky=N)
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad22e4a39f39e670871f82214952b75c4416d3ed
