@@ -110,9 +110,6 @@ class ScreenGame(Frame):
         self.turn += 1
         self.clear_board()
         if self.turn < 3:
-            if self.x:
-                self.blackjack.destroy()
-                self.x = False
             self.turn_switch(self.turn)
             self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
                                 font=("Arial", 30, "bold"))
@@ -123,6 +120,10 @@ class ScreenGame(Frame):
             self.turn_switch(self.turn)
             self.h.destroy()
             self.s.destroy()
+        if self.x:
+            self.x = False
+            self.blackjack.destroy()
+
 
 
     def round_end(self):
@@ -211,7 +212,7 @@ class ScreenGame(Frame):
             if self.player1.score == 21:
                 self.x = True
                 self.blackjack = Button(self,text="Player 1 Blackjack",command=self.stay,font=("Arial",16,"bold"))
-                self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=3)
+                self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
         elif self.turn == 2:
             if not self.cleared:
                 self.clear_board()
@@ -231,11 +232,16 @@ class ScreenGame(Frame):
             self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
             self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
             self.column += 1
+            if self.player2.score == 21:
+                self.x = True
+                self.blackjack = Button(self,text="Player 2 Blackjack",command=self.stay,font=("Arial",16,"bold"))
+                self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
         self.start.destroy()
-        self.h = Button(self,text="Hit",command=self.Hit)
-        self.h.grid(row=2,column=14,sticky=E)
-        self.s = Button(self,text="Stay",command=self.stay)
-        self.s.grid(row=2,column=0,sticky=W)
+        if not self.x:
+            self.h = Button(self,text="Hit",command=self.Hit)
+            self.h.grid(row=2,column=14,sticky=E)
+            self.s = Button(self,text="Stay",command=self.stay)
+            self.s.grid(row=2,column=0,sticky=W)
 
     def score_display(self):
         self.p1_wins = Label(self,text=self.player1.win,font=("Times",12))
