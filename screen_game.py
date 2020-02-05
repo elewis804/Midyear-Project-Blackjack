@@ -91,6 +91,7 @@ class ScreenGame(Frame):
         if not self.cleared:
             if len(self.player1.p_hand) > 0:
                 for x in range(len(self.player1.p_hand)):
+                    print(self.player1.p_hand[x])
                     self.player1.p_hand[x].destroy()
                 for x in self.player1.p_hand:
                     self.player1.p_hand.remove(x)
