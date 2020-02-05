@@ -89,6 +89,11 @@ class ScreenGame(Frame):
 
     def clear_board(self):
         if not self.cleared:
+            if 0 in self.player1.p_hand:
+                self.player1.p_hand.remove(0)
+            if 0 in self.player2.p_hand:
+                self.player2.p_hand.remove(0)
+
             if len(self.player1.p_hand) > 0:
                 for x in range(len(self.player1.p_hand)):
                     print(self.player1.p_hand[x])
@@ -100,6 +105,7 @@ class ScreenGame(Frame):
                     self.player2.p_hand[x].destroy()
                 for x in self.player2.p_hand:
                     self.player2.p_hand.remove(x)
+            self.cleared = True
         else:
             self.cleared = True
         self.row = 5
@@ -110,6 +116,9 @@ class ScreenGame(Frame):
     def stay(self):
         self.turn += 1
         self.clear_board()
+        if self.x:
+            self.x = False
+            self.blackjack.destroy()
         if self.turn < 3:
             self.turn_switch(self.turn)
             self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
@@ -121,9 +130,7 @@ class ScreenGame(Frame):
             self.turn_switch(self.turn)
             self.h.destroy()
             self.s.destroy()
-        if self.x:
-            self.x = False
-            self.blackjack.destroy()
+
 
 
 
