@@ -1,4 +1,5 @@
 import random
+from screen_game import ScreenGame
 
 
 class card(object):
@@ -40,8 +41,15 @@ class Player(object):
         else:
             lis = self.lis4
         x = random.choice(lis)
-
         self.hand.append(x)
+        for x in self.hand:
+            if x.name == "Ace":
+                if self.score + 11 > 21:
+                    x.value = 1
+                elif self.score + 11 == 21:
+                    x.value = 11
+                else:
+                    x.value = ScreenGame.ace()
         self.score += x.value
         lis.remove(x)
         if self.score > 21:
