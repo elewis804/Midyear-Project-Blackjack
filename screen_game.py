@@ -242,3 +242,14 @@ class ScreenGame(Frame):
         self.p1_wins.grid(row=0,column=5,sticky=N)
         self.p2_wins = Label(self,text=self.player2.win,font=("Times",12))
         self.p2_wins.grid(row=0,column=8,sticky=N)
+
+    def ace(self):
+        self.h.destroy()
+        self.s.destroy()
+        self.valueButton = 0
+        Button(text="I want my ace to be an 11", value=11, variable=self.valueButton).grid(row=2, column=14, sticky=E)
+        Button(text="I want my ace to be a 1", value=1, variable=self.valueButton).grid(row=2, column=0, sticky=W)
+        self.h = Button(self, text="Hit", command=self.Hit)
+        self.h.grid(row=2, column=14, sticky=E)
+        self.s = Button(self, text="Stay", command=self.stay)
+        self.s.grid(row=2, column=0, sticky=W)
