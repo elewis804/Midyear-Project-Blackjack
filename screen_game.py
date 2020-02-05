@@ -22,7 +22,7 @@ class ScreenGame(Frame):
         w = Label(self, image=back)
         w.photo = back
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
-        self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,font=("Arial",30,"bold"))
+        self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
         self.start.grid(row=5,column=6)
 
 
@@ -121,8 +121,10 @@ class ScreenGame(Frame):
             self.blackjack.destroy()
         if self.turn < 3:
             self.turn_switch(self.turn)
-            self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
+            self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,bg ="indian red",
                                 font=("Arial", 30, "bold"))
+            if self.turn == 2:
+                self.start["bg"] = "sky blue"
             self.start.grid(row=5, column=6)
             self.h.destroy()
             self.s.destroy()
@@ -131,38 +133,35 @@ class ScreenGame(Frame):
             self.h.destroy()
             self.s.destroy()
 
-
-
-
     def round_end(self):
         if self.player1.bust:
             if self.player2.bust:
-                self.display_current = Label(self,text="Tie Round")
+                self.display_current = Label(self,text="Tie Round",bg="orchid 2")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
             else:
-                self.display_current = Label(self,text="Player 2 Wins Round")
+                self.display_current = Label(self,text="Player 2 Wins Round",bg="indian red")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 if self.rounds > self.player2.win + self.player1.win - self.ties:
                     self.player2.win += 1
         elif self.player2.bust:
-            self.display_current = Label(self,text="PLayer 1 Wins Round")
+            self.display_current = Label(self,text="Player 1 Wins Round",bg="indian red")
             self.display_current.grid(row=13,column=7,sticky=S)
             if self.rounds > self.player1.win + self.player2.win - self.ties:
                 self.player1.win += 1
         else:
             if self.player1.score > self.player2.score:
-                self.display_current = Label(self,text="Player 1 Wins Round")
+                self.display_current = Label(self,text="Player 1 Wins Round",bg="indian red")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 if self.rounds > self.player1.win + self.player2.win - self.ties:
                     self.player1.win += 1
             elif self.player2.score > self.player1.score:
-                self.display_current = Label(self,text="Player 2 Wins Round")
+                self.display_current = Label(self,text="Player 2 Wins Round",bg="sky blue")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 if self.rounds > self.player1.win + self.player2.win - self.ties:
                     self.player2.win += 1
             else:
-                self.display_current = Label(self,text="Tie Round")
+                self.display_current = Label(self,text="Tie Round",bg ="orchid")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
         self.score_display()
@@ -173,8 +172,10 @@ class ScreenGame(Frame):
         self.player1.bust = False
         self.player2.bust = False
         self.end = True
-        self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,
+        self.start = Button(self, text="Player " + str(self.turn) + "Start turn",bg="indian red",command=self.begin,
                             font=("Arial", 30, "bold"))
+        if self.turn == 2:
+            self.start["bg"] = "sky blue"
         self.start.grid(row=5, column=6)
 
     def turn_switch(self,to):
@@ -187,9 +188,6 @@ class ScreenGame(Frame):
             self.switch = Label(self,text=("Round Over"),font=("Times",16,"bold"))
             self.switch.grid(row=11,column=7,sticky=N)
             self.round_end()
-
-
-
 
     def begin(self):
         if self.turn == 1:
@@ -219,7 +217,7 @@ class ScreenGame(Frame):
             self.column += 1
             if self.player1.score == 21:
                 self.x = True
-                self.blackjack = Button(self,text="Player 1 Blackjack",command=self.stay,font=("Arial",16,"bold"))
+                self.blackjack = Button(self,text="Player 1 Blackjack",bg="indian red",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
         elif self.turn == 2:
             if not self.cleared:
@@ -242,7 +240,7 @@ class ScreenGame(Frame):
             self.column += 1
             if self.player2.score == 21:
                 self.x = True
-                self.blackjack = Button(self,text="Player 2 Blackjack",command=self.stay,font=("Arial",16,"bold"))
+                self.blackjack = Button(self,text="Player 2 Blackjack",bg="sky blue",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
         self.start.destroy()
         if not self.x:
@@ -252,9 +250,9 @@ class ScreenGame(Frame):
             self.s.grid(row=2,column=0,sticky=W)
 
     def score_display(self):
-        self.p1_wins = Label(self,text=self.player1.win,font=("Times",12))
+        self.p1_wins = Label(self,text="Player 1 wins: "+str(self.player1.win),bg="indian red",font=("Times",14))
         self.p1_wins.grid(row=0,column=5,sticky=N)
-        self.p2_wins = Label(self,text=self.player2.win,font=("Times",12))
+        self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
         self.p2_wins.grid(row=0,column=8,sticky=N)
 
     def ace(self):
