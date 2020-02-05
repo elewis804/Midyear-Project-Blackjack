@@ -190,6 +190,9 @@ class ScreenGame(Frame):
             self.round_end()
 
     def begin(self):
+        if self.rounds > 1:
+            if self.turn == 1:
+                self.switch["text"] = None
         if self.turn == 1:
             self.rounds += 1
             for x in self.player1.hand:
@@ -255,13 +258,3 @@ class ScreenGame(Frame):
         self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
         self.p2_wins.grid(row=0,column=8,sticky=N)
 
-    def ace(self):
-        self.h.destroy()
-        self.s.destroy()
-        self.valueButton = 0
-        Button(text="I want my ace to be an 11", value=11, variable=self.valueButton).grid(row=2, column=14, sticky=E)
-        Button(text="I want my ace to be a 1", value=1, variable=self.valueButton).grid(row=2, column=0, sticky=W)
-        self.h = Button(self, text="Hit", command=self.Hit)
-        self.h.grid(row=2, column=14, sticky=E)
-        self.s = Button(self, text="Stay", command=self.stay)
-        self.s.grid(row=2, column=0, sticky=W)
