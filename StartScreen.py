@@ -8,10 +8,11 @@ class Start(Frame):
         self.close_file = close_file
 
     def create_widgets(self):
-        Label(self, text="Welcome to Blackjack!", fg="green", font=31).grid(row=0, column=0, sticky=N)
-        Label(self, text="Made by Benen Sullivan, Erik Lewis, Lukas Tegge, and Hayun Jung").grid(row=1, column=0, sticky=N)
-        Button(self, text="Begin!", bg="green", command=self.startgame).grid(row=2, column=0, sticky=N)
-
+        back = PhotoImage(file="Images-Blackjack/creditscreen.png")
+        w = Label(self, image=back)
+        w.photo = back
+        w.grid(row=0, column=0, rowspan=16, columnspan=16)
+        Label(self, text="Welcome to Blackjack!", fg="green",bg = "light goldenrod",font=31).grid(row=0, column=8, sticky=N)
+        Button(self, text="Begin!", bg="green", font = 24,command=self.startgame).grid(row=3, column=8, sticky=N)
     def startgame(self):
-
         self.close_file()
