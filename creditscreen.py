@@ -12,4 +12,4 @@ class Credit(Frame):
 
 
     def create_widgets(self):
-        Label(text = "Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Eric Lewis", font = 31).grid(row = 0, columnn = 0, sticky = W )
+        Label(text = "Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Eric Lewis", font = 31).grid(row = 1, columnn = 1, sticky = W )
