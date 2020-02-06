@@ -121,7 +121,7 @@ class ScreenGame(Frame):
             self.blackjack.destroy()
         if self.turn < 3:
             self.turn_switch(self.turn)
-            self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,bg ="indian red",
+            self.start = Button(self, text="Player " + str(self.turn) + " Start turn", command=self.begin,bg ="indian red",
                                 font=("Arial", 30, "bold"))
             if self.turn == 2:
                 self.start["bg"] = "sky blue"
@@ -181,7 +181,7 @@ class ScreenGame(Frame):
     def turn_switch(self,to):
         '''This method will display a constant label showing whose turn it is'''
         if self.turn < 3:
-            self.switch = Label(self,text=("Turn: Player" + str(to)),font=("Times",16,"bold"))
+            self.switch = Label(self,text=("Turn: Player " + str(to)),font=("Times",16,"bold"))
             self.switch.grid(row=11,column=7,sticky=N)
         else:
             self.switch.destroy()
