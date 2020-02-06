@@ -22,7 +22,7 @@ class ScreenGame(Frame):
         w = Label(self, image=back)
         w.photo = back
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
-        self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
+        self.start = Button(self,text="Player " + str(self.turn) + " Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
         self.start.grid(row=5,column=6)
 
 
@@ -257,4 +257,3 @@ class ScreenGame(Frame):
         self.p1_wins.grid(row=0,column=5,sticky=N)
         self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
         self.p2_wins.grid(row=0,column=8,sticky=N)
-
