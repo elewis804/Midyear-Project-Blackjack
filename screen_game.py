@@ -3,6 +3,7 @@ import time
 from Blackjackinteractions import Player
 
 '''TO DO:
+GLitches out when cards go down to second row sometimes, find fix
 '''
 class ScreenGame(Frame):
     def __init__(self,master):
@@ -45,6 +46,7 @@ class ScreenGame(Frame):
                     self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
                     self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
                     self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
             else:
                 self.turn = 2
                 self.player1.bust = True
@@ -74,6 +76,7 @@ class ScreenGame(Frame):
                     self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
                     self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
                     self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
             else:
                 self.turn = 3
                 self.player2.bust = True
@@ -89,6 +92,10 @@ class ScreenGame(Frame):
 
     def clear_board(self):
         if not self.cleared:
+            if 0 in self.player1.p_hand:
+                self.player1.p_hand.remove(0)
+            if 0 in self.player2.p_hand:
+                self.player2.p_hand.remove(0)
             if 0 in self.player1.p_hand:
                 self.player1.p_hand.remove(0)
             if 0 in self.player2.p_hand:
@@ -258,3 +265,13 @@ class ScreenGame(Frame):
         self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
         self.p2_wins.grid(row=0,column=8,sticky=N)
 
+    def ace(self):
+        self.h.destroy()
+        self.s.destroy()
+        self.valueButton = 0
+        Button(text="I want my ace to be an 11", value=11, variable=self.valueButton).grid(row=2, column=14, sticky=E)
+        Button(text="I want my ace to be a 1", value=1, variable=self.valueButton).grid(row=2, column=0, sticky=W)
+        self.h = Button(self, text="Hit", command=self.Hit)
+        self.h.grid(row=2, column=14, sticky=E)
+        self.s = Button(self, text="Stay", command=self.stay)
+        self.s.grid(row=2, column=0, sticky=W)
