@@ -42,8 +42,6 @@ class Player(object):
         if x.name == "Ace":
             if self.score + 11 > 21:
                 x.value = 1
-            elif self.score + 11 == 21:
-                x.value = 11
             else:
                 x.value = 11
         self.hand.append(x)
