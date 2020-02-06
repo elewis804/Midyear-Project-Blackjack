@@ -11,7 +11,7 @@ class Screen_Manager(object):
 
     def start_screen(self):
         self.root.title("Main Menu")
-        self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame)
+        self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame, self.creditscreen)
 
 
     def startup_screengame(self):
@@ -28,6 +28,7 @@ class Screen_Manager(object):
         self.currentScreen.destroy()
         self.root.title("Credits")
         self.currentScreen = Credit(self.root)
+
 def main():
     game = Screen_Manager()
     game.start_screen()
