@@ -58,7 +58,7 @@ class ScreenGame(Frame):
                 self.s.destroy()
         elif self.turn == 2:
             self.player2.getRandomCard()
-            if self.player2.score <= 20:
+            if self.player2.score <= 20 and 0 not in self.player2.p_hand:
                 self.player2.p_hand.append(0)
                 if self.column < 4:
                     card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
@@ -100,7 +100,7 @@ class ScreenGame(Frame):
                     self.player1.p_hand[x].destroy()
                 for x in self.player1.p_hand:
                     self.player1.p_hand.remove(x)
-            if len(self.player2.p_hand) > 0:
+            if len(self.player2.p_hand) > 0 and 0 not in self.player2.p_hand:
                 for x in range(len(self.player2.p_hand)):
                     self.player2.p_hand[x].destroy()
                 for x in self.player2.p_hand:
