@@ -5,11 +5,11 @@ class Credit(Frame):
         super(Credit, self).__init__(master)
         self.grid()
         self.create_widgets()
-        back = PhotoImage(file="Images-Blackgack/creditscreen.png")
-        w = Label(self, image=back)
-        w.photo = back
-        w.grid(row=0, column=0, rowspan=15, columnspan=15)
+        quill = PhotoImage(file="Images-Blackjack/creditscreen.png")
+        q = Label(self, image=quill)
+        q.photo = quill
+        q.grid(row=0, column=0, rowspan=15, columnspan=15)
 
 
     def create_widgets(self):
-        Label(text = "Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Erik Lewis", font = 31).grid(row = 1, column = 1, sticky = W )
+        Label(text = "Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Eric Lewis  ", bg = 'gold', font = ("Arial",19, "bold")).grid(row = 1, column = 0, sticky = W )
