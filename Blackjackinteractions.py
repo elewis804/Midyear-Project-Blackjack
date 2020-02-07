@@ -42,18 +42,22 @@ class Player(object):
         if x.name == "Ace":
             if self.score + 11 > 21:
                 x.value = 1
-            else:
+            elif self.score + 11 <= 21:
                 x.value = 11
         self.hand.append(x)
         for z in range(len(self.hand)):
             if self.hand[z].name == "Ace":
                 if self.score + 11 > 21:
                     self.hand[z].value = 1
-                    x.value = 1
                 else:
                     self.hand[z].value = 11
-                    x.value = 11
-        self.score += x.value
+        self.score = 0
+        for i in self.hand:
+            self.score += i.value
+        print("Card: ",x.name)
+        print("Picture: ",x.image)
+        print("Value: ",x.value)
+        print("Score: ",self.score)
         lis.remove(x)
         if self.score > 21:
             self.bust = True

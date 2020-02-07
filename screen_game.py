@@ -3,6 +3,7 @@ import time
 from Blackjackinteractions import Player
 
 '''TO DO:
+GLitches out when cards go down to second row sometimes, find fix
 '''
 class ScreenGame(Frame):
     def __init__(self,master):
@@ -22,14 +23,14 @@ class ScreenGame(Frame):
         w = Label(self, image=back)
         w.photo = back
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
-        self.start = Button(self,text="Player " + str(self.turn) + " Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
+        self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
         self.start.grid(row=5,column=6)
 
 
     def Hit(self):
         if self.turn == 1:
             self.player1.getRandomCard()
-            if self.player1.score <= 20:
+            if self.player1.score <= 21 and 0 not in self.player1.p_hand:
                 self.player1.p_hand.append(0)
                 if self.column < 4:
                     card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
@@ -40,11 +41,11 @@ class ScreenGame(Frame):
                 else:
                     self.row += 2
                     self.column = 1
-                    self.player1.p_hand.append(0)
                     card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
                     self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
                     self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
                     self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
             else:
                 self.turn = 2
                 self.player1.bust = True
@@ -58,7 +59,7 @@ class ScreenGame(Frame):
                 self.s.destroy()
         elif self.turn == 2:
             self.player2.getRandomCard()
-            if self.player2.score <= 20 and 0 not in self.player2.p_hand:
+            if self.player2.score <= 21 and 0 not in self.player2.p_hand:
                 self.player2.p_hand.append(0)
                 if self.column < 4:
                     card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
@@ -69,11 +70,11 @@ class ScreenGame(Frame):
                 else:
                     self.row += 2
                     self.column = 1
-                    self.player1.p_hand.append(0)
-                    card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
-                    self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
-                    self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
-                    self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
+                    card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
+                    self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
+                    self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
+                    self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
+                    self.column += 1
             else:
                 self.turn = 3
                 self.player2.bust = True
@@ -82,13 +83,13 @@ class ScreenGame(Frame):
                 self.turn_switch(self.turn)
                 self.h.destroy()
                 self.s.destroy()
-                for x in range(len(self.player2.p_hand)):
-                    self.player2.p_hand[x].destroy()
-                for x in self.player2.p_hand:
-                    self.player2.p_hand.remove(x)
 
     def clear_board(self):
         if not self.cleared:
+            if 0 in self.player1.p_hand:
+                self.player1.p_hand.remove(0)
+            if 0 in self.player2.p_hand:
+                self.player2.p_hand.remove(0)
             if 0 in self.player1.p_hand:
                 self.player1.p_hand.remove(0)
             if 0 in self.player2.p_hand:
@@ -100,7 +101,7 @@ class ScreenGame(Frame):
                     self.player1.p_hand[x].destroy()
                 for x in self.player1.p_hand:
                     self.player1.p_hand.remove(x)
-            if len(self.player2.p_hand) > 0 and 0 not in self.player2.p_hand:
+            if len(self.player2.p_hand) > 0:
                 for x in range(len(self.player2.p_hand)):
                     self.player2.p_hand[x].destroy()
                 for x in self.player2.p_hand:
@@ -121,7 +122,7 @@ class ScreenGame(Frame):
             self.blackjack.destroy()
         if self.turn < 3:
             self.turn_switch(self.turn)
-            self.start = Button(self, text="Player " + str(self.turn) + " Start turn", command=self.begin,bg ="indian red",
+            self.start = Button(self, text="Player " + str(self.turn) + "Start turn", command=self.begin,bg ="indian red",
                                 font=("Arial", 30, "bold"))
             if self.turn == 2:
                 self.start["bg"] = "sky blue"
@@ -172,16 +173,16 @@ class ScreenGame(Frame):
         self.player1.bust = False
         self.player2.bust = False
         self.end = True
+        self.player1.score = 0
+        self.player2.score = 0
         self.start = Button(self, text="Player " + str(self.turn)+" start turn",bg="indian red",command=self.begin,
                             font=("Arial", 30, "bold"))
-        if self.turn == 2:
-            self.start["bg"] = "sky blue"
         self.start.grid(row=5, column=6)
 
     def turn_switch(self,to):
         '''This method will display a constant label showing whose turn it is'''
         if self.turn < 3:
-            self.switch = Label(self,text=("Turn: Player " + str(to)),font=("Times",16,"bold"))
+            self.switch = Label(self,text=("Turn: Player" + str(to)),font=("Times",16,"bold"))
             self.switch.grid(row=11,column=7,sticky=N)
         else:
             self.switch.destroy()
