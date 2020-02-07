@@ -12,6 +12,6 @@ class Credit(Frame):
 
 
     def create_widgets(self):
-        Label(self, text = "Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Eric Lewis  ", bg = 'gold', font = ("Arial",19, "bold")).grid(row = 1, column = 0, sticky = W )
-        a = Label(self, text = 'Sorry you\'re trapped now, you have to exit to go back', bg = 'gold', font = 'bold')
+        Label(self, text = "    Made by Benen Sullivan, Lukas Tegge, Hayun Jung, and Eric Lewis  ", bg = 'gold', font = ("Arial",19, "bold")).grid(row = 1, column = 0, sticky = W )
+        a = Label(self, text = '        Sorry you\'re trapped now, you have to exit to go back     ', bg = 'gold', font = ('Arial', 14,'bold'))
         a.grid(row = 2, column = 0, sticky = W)
