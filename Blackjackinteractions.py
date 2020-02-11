@@ -45,6 +45,7 @@ class Player(object):
             elif self.score + 11 <= 21:
                 x.value = 11
         self.hand.append(x)
+        self.score += x.value
         for z in range(len(self.hand)):
             if self.hand[z].name == "Ace":
                 if self.score + 11 > 21:
@@ -61,12 +62,3 @@ class Player(object):
         lis.remove(x)
         if self.score > 21:
             self.bust = True
-    def comparecard(self,player2):
-        if self.score > player2.score:
-            self.win += 1
-            return "Player 1 has won"
-        elif self.score == player2.score:
-            return "It is a tie!"
-        else:
-            player2.win += 1
-            return "Player 2 has won!"
