@@ -28,6 +28,7 @@ class Player(object):
             self.lis4.append(card(x[0],x[1],x[2]))
 
     def getRandomCard(self):
+        print("Score at beginning of get_random: ",self.score)
         avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
         lis = random.randint(0,avail)
         if lis <= len(self.lis1) - 1:
@@ -45,7 +46,9 @@ class Player(object):
             elif self.score + 11 <= 21:
                 x.value = 11
         self.hand.append(x)
-        self.score += x.value
+        self.score = 0
+        for i in self.hand:
+            self.score += i.value
         for z in range(len(self.hand)):
             if self.hand[z].name == "Ace":
                 if self.score + 11 > 21:

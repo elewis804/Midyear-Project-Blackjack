@@ -216,6 +216,9 @@ class ScreenGame(Frame):
             self.round_end()
 
     def begin(self):
+        print("Scores before begin:")
+        print("Player 1 score:", self.player1.score)
+        print("Player 2 score:", self.player2.score)
         if self.rounds > 1:
             if self.turn == 1:
                 self.switch["text"] = None
@@ -227,6 +230,9 @@ class ScreenGame(Frame):
                 self.player2.hand.remove(h)
             self.player1.score = 0
             self.player2.score = 0
+            print("Scores before begin for player 1:")
+            print("Player 1 score:", self.player1.score)
+            print("Player 2 score:", self.player2.score)
         if self.rounds > 1:
             self.display_current.destroy()
         if self.turn == 1:
@@ -244,15 +250,24 @@ class ScreenGame(Frame):
             self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
             self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
             self.column += 1
+            print("Scores after p1 begin:")
+            print("Player 1 score:", self.player1.score)
+            print("Player 2 score:", self.player2.score)
             if self.player1.score == 21:
                 self.x = True
                 self.blackjack = Button(self,text="Player 1 Blackjack",bg="indian red",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
+                print("Scores after p1 blackjack:")
+                print("Player 1 score:", self.player1.score)
+                print("Player 2 score:", self.player2.score)
         elif self.turn == 2:
             if not self.cleared:
                 self.clear_board()
             else:
                 self.cleared = False
+            print("Scores before p2 begin:")
+            print("Player 1 score:", self.player1.score)
+            print("Player 2 score:", self.player2.score)
             self.player2.getRandomCard()
             self.player2.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
@@ -267,10 +282,16 @@ class ScreenGame(Frame):
             self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
             self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
             self.column += 1
+            print("Scores after p2 begin:")
+            print("Player 1 score:", self.player1.score)
+            print("Player 2 score:", self.player2.score)
             if self.player2.score == 21:
                 self.x = True
                 self.blackjack = Button(self,text="Player 2 Blackjack",bg="sky blue",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
+                print("Scores after p2 blackjack:")
+                print("Player 1 score:", self.player1.score)
+                print("Player 2 score:", self.player2.score)
         self.start.destroy()
         if not self.x:
             self.h = Button(self,text="Hit",command=self.Hit)
