@@ -27,12 +27,14 @@ class Player(object):
             self.lis3.append(card(x[0],x[1],x[2]))
             self.lis4.append(card(x[0],x[1],x[2]))
 
-    def getRandomCard(self):
+    def getRandomCard(self,startup=False):
+        '''
         print("Score at beginning of get_random: ",self.score)
         if len(self.hand) > 1:
             print("Hand at beginning of get_random: ",end="  ")
             for h in self.hand:
                 print(h.name)
+        '''
         avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
         lis = random.randint(0,avail)
         if lis <= len(self.lis1) - 1:
@@ -44,20 +46,32 @@ class Player(object):
         else:
             lis = self.lis4
         x = random.choice(lis)
-        if x.name == "Ace":
-            if self.score + 11 > 21:
-                x.value = 1
-            else:
-                x.value = 11
+        if startup:
+            if x.name == "Ace":
+                if len(self.hand) < 1:
+                    if x.name == "Ace":
+                        x.value = 11
+                else:
+                    for g in self.hand:
+                        if g.name == "Ace":
+                            x.value = 1
+        if not startup:
+            if x.name == "Ace":
+                if self.score + 11 > 21:
+                    x.value = 1
+                else:
+                    x.value = 11
         self.hand.append(x)
         self.score += x.value
-        if x.name != "Ace":
-            for z in range(len(self.hand)):
-                if self.hand[z].name == "Ace":
-                    if self.score + 11 > 21:
-                        self.hand[z].value = 1
-                    else:
-                        self.hand[z].value = 11
+        if not startup:
+            if x.name != "Ace":
+                for z in range(len(self.hand)):
+                    if z != len(self.hand)-1:
+                        if self.hand[z].name == "Ace":
+                            if self.score + 11 > 21:
+                                self.hand[z].value = 1
+                            else:
+                                self.hand[z].value = 11
         self.score = 0
         for i in self.hand:
             self.score += i.value

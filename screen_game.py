@@ -235,14 +235,14 @@ class ScreenGame(Frame):
             self.display_current.destroy()
         if self.turn == 1:
             self.player1.clear_hand()
-            self.player1.getRandomCard()
+            self.player1.getRandomCard(True)
             self.player1.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
             self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
             self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
             self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
             self.column += 1
-            self.player1.getRandomCard()
+            self.player1.getRandomCard(True)
             self.player1.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
             self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
@@ -268,14 +268,14 @@ class ScreenGame(Frame):
             print("Player 1 score:", self.player1.score)
             print("Player 2 score:", self.player2.score)
             self.player2.clear_hand()
-            self.player2.getRandomCard()
+            self.player2.getRandomCard(True)
             self.player2.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
             self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
             self.player2.p_hand[len(self.player2.p_hand) - 1].photo = card1
             self.player2.p_hand[len(self.player2.p_hand) - 1].grid(row=self.row, column=self.column)
             self.column += 1
-            self.player2.getRandomCard()
+            self.player2.getRandomCard(True)
             self.player2.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
             self.player2.p_hand[len(self.player2.p_hand) - 1] = Label(self, image=card1)
