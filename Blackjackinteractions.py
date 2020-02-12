@@ -29,6 +29,10 @@ class Player(object):
 
     def getRandomCard(self):
         print("Score at beginning of get_random: ",self.score)
+        if len(self.hand) > 1:
+            print("Hand at beginning of get_random: ",end="  ")
+            for h in self.hand:
+                print(h.name)
         avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
         lis = random.randint(0,avail)
         if lis <= len(self.lis1) - 1:
@@ -43,18 +47,17 @@ class Player(object):
         if x.name == "Ace":
             if self.score + 11 > 21:
                 x.value = 1
-            elif self.score + 11 <= 21:
+            else:
                 x.value = 11
         self.hand.append(x)
-        self.score = 0
-        for i in self.hand:
-            self.score += i.value
-        for z in range(len(self.hand)):
-            if self.hand[z].name == "Ace":
-                if self.score + 11 > 21:
-                    self.hand[z].value = 1
-                else:
-                    self.hand[z].value = 11
+        self.score += x.value
+        if x.name != "Ace":
+            for z in range(len(self.hand)):
+                if self.hand[z].name == "Ace":
+                    if self.score + 11 > 21:
+                        self.hand[z].value = 1
+                    else:
+                        self.hand[z].value = 11
         self.score = 0
         for i in self.hand:
             self.score += i.value
@@ -65,3 +68,9 @@ class Player(object):
         lis.remove(x)
         if self.score > 21:
             self.bust = True
+
+    def clear_hand(self):
+        for x in self.hand:
+            self.hand.remove(x)
+        if len(self.hand) != 0:
+            del self.hand[0]

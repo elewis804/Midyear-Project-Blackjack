@@ -112,13 +112,11 @@ class ScreenGame(Frame):
     def clear_board(self):
         if not self.cleared:
             if 0 in self.player1.p_hand:
-                self.player1.p_hand.remove(0)
+                while 0 in self.player1.p_hand:
+                    self.player1.p_hand.remove(0)
             if 0 in self.player2.p_hand:
-                self.player2.p_hand.remove(0)
-            if 0 in self.player1.p_hand:
-                self.player1.p_hand.remove(0)
-            if 0 in self.player2.p_hand:
-                self.player2.p_hand.remove(0)
+                while 0 in self.player2.p_hand:
+                    self.player2.p_hand.remove(0)
 
             if len(self.player1.p_hand) > 0:
                 for x in range(len(self.player1.p_hand)):
@@ -236,6 +234,7 @@ class ScreenGame(Frame):
         if self.rounds > 1:
             self.display_current.destroy()
         if self.turn == 1:
+            self.player1.clear_hand()
             self.player1.getRandomCard()
             self.player1.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
@@ -268,6 +267,7 @@ class ScreenGame(Frame):
             print("Scores before p2 begin:")
             print("Player 1 score:", self.player1.score)
             print("Player 2 score:", self.player2.score)
+            self.player2.clear_hand()
             self.player2.getRandomCard()
             self.player2.p_hand.append(0)
             card1 = PhotoImage(file="Images-Blackjack/" + self.player2.hand[len(self.player2.hand) - 1].image)
