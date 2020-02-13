@@ -3,7 +3,12 @@ import time
 from Blackjackinteractions import Player
 
 '''TO DO:
-GLitches out when cards go down to second row sometimes, find fix
+Screen Game is currently hard coded to be fixated on turns of only two players. If this is to be fixed, the easiest 
+solution would likely be changing any part of the code that relies on self.turn being < 3 to being < the number of 
+players, which can be added as an additional attribute of init. Obviously, the goal is to only have up to 4 players,
+but hard coding two more players would likely take more time than just allowing for a potentially infinite amount. 
+Additionally, Interactions will need to have a way to end the game and display final scores if the deck of cards gets
+down to 1, or a way to refill each player's hand once they drop to a certain point. 
 '''
 class ScreenGame(Frame):
     def __init__(self,master):
