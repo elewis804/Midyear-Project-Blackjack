@@ -13,12 +13,11 @@ class Screen_Manager(object):
         self.root.title("Main Menu")
         self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame, self.creditscreen)
 
-
     def startup_screengame(self):
         self.currentScreen.destroy()
         self.root.title("BlackJack!")
         self.currentScreen = ScreenGame(self.root)
-    
+
     def startup_AIGame(self):
         self.currentScreen.destroy()
         self.root.title("Blackjack!")
