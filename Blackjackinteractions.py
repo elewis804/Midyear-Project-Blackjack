@@ -75,10 +75,6 @@ class Player(object):
         self.score = 0
         for i in self.hand:
             self.score += i.value
-        print("Card: ",x.name)
-        print("Picture: ",x.image)
-        print("Value: ",x.value)
-        print("Score: ",self.score)
         lis.remove(x)
         if self.score > 21:
             self.bust = True
