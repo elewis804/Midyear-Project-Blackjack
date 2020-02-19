@@ -6,7 +6,6 @@ class card(object):
         self.image = pic
         self.value = int(num)
 
-
 class Player(object):
     def __init__(self,file="Cards.txt"):
         self.score = 0
