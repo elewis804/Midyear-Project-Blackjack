@@ -90,7 +90,6 @@ class ScreenGame(Frame):
                 self.h.destroy()
                 self.s.destroy()
 
-
     def clear_board(self):
         if not self.cleared:
             if 0 in self.player1.p_hand:
