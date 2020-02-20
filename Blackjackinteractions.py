@@ -83,3 +83,4 @@ class Player(object):
             self.hand.remove(x)
         if len(self.hand) != 0:
             del self.hand[0]
+
