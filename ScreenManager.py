@@ -3,6 +3,7 @@ from StartScreen import Start
 from screen_game import ScreenGame
 from BlackjackAI import AIGame
 from creditscreen import Credit
+from screen_game_multiplayer import ScreenGameMultiplayer
 
 class Screen_Manager(object):
     def __init__(self):
@@ -11,7 +12,7 @@ class Screen_Manager(object):
 
     def start_screen(self):
         self.root.title("Main Menu")
-        self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame, self.creditscreen)
+        self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame, self.startup_4Player, self.creditscreen)
 
     def startup_screengame(self):
         self.currentScreen.destroy()
@@ -22,6 +23,11 @@ class Screen_Manager(object):
         self.currentScreen.destroy()
         self.root.title("Blackjack!")
         self.currentScreen = AIGame(self.root)
+
+    def startup_4Player(self):
+        self.currentScreen.destroy()
+        self.root.title("Blackjack!")
+        self.currentScreen = ScreenGameMultiplayer(self.root)
 
     def creditscreen(self):
         self.currentScreen.destroy()
