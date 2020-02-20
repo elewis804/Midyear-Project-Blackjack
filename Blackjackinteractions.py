@@ -80,15 +80,17 @@ class Player(object):
         avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
         if avail < 2:
             self.shuffle()
+        print("Score: ", self.score)
 
     def clear_hand(self):
         for x in self.hand:
             self.hand.remove(x)
         if len(self.hand) != 0:
             del self.hand[0]
+        if len(self.hand) != 0:
+            del self.hand[0]
 
     def shuffle(self):
-        print("yes")
         self.lis1 = []
         self.lis2 = []
         self.lis3 = []

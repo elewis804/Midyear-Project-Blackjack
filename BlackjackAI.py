@@ -35,14 +35,14 @@ class AIGame(Frame):
             self.player1.hand.remove(x)
         self.player1.score = 0
         self.player1.clear_hand()
-        self.player1.getRandomCard()
+        self.player1.getRandomCard(True)
         self.player1.p_hand.append(0)
         card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
         self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
         self.player1.p_hand[len(self.player1.p_hand) - 1].photo = card1
         self.player1.p_hand[len(self.player1.p_hand) - 1].grid(row=self.row, column=self.column)
         self.column += 1
-        self.player1.getRandomCard()
+        self.player1.getRandomCard(True)
         self.player1.p_hand.append(0)
         card1 = PhotoImage(file="Images-Blackjack/" + self.player1.hand[len(self.player1.hand) - 1].image)
         self.player1.p_hand[len(self.player1.p_hand) - 1] = Label(self, image=card1)
@@ -85,8 +85,8 @@ class AIGame(Frame):
     def AI(self):
         self.AIPlayer.clear_hand()
         self.AIPlayer.score = 0
-        self.AIPlayer.getRandomCard()
-        self.AIPlayer.getRandomCard()
+        self.AIPlayer.getRandomCard(True)
+        self.AIPlayer.getRandomCard(True)
         while self.AIPlayer.score <= 16:
             if self.AIPlayer.score >= 21:
                 self.AIPlayer.bust = True
@@ -99,6 +99,8 @@ class AIGame(Frame):
     
     
     def stay(self):
+        if self.x:
+            self.blackjack.destroy()
         self.clear_board()
         self.AI()
     
@@ -108,7 +110,6 @@ class AIGame(Frame):
                 self.player1.p_hand.remove(0)
             if len(self.player1.p_hand) > 0:
                 for x in range(len(self.player1.p_hand)):
-                    print(self.player1.p_hand[x])
                     self.player1.p_hand[x].destroy()
                 for x in self.player1.p_hand:
                     self.player1.p_hand.remove(x)
@@ -132,11 +133,11 @@ class AIGame(Frame):
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
             else:
-                self.display_current = Label(self,text="AI Wins Round",bg="indian red")
+                self.display_current = Label(self,text="AI Wins Round",bg="orchid2")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.AIPlayer.win += 1
         elif self.AIPlayer.bust:
-            self.display_current = Label(self,text="AI Wins Round",bg="indian red")
+            self.display_current = Label(self,text="Player 1 Wins Round",bg="indian red")
             self.display_current.grid(row=13,column=7,sticky=S)
 
             self.player1.win += 1
