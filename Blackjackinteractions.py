@@ -77,6 +77,9 @@ class Player(object):
         lis.remove(x)
         if self.score > 21:
             self.bust = True
+        avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
+        if avail < 2:
+            self.shuffle()
 
     def clear_hand(self):
         for x in self.hand:
@@ -84,3 +87,17 @@ class Player(object):
         if len(self.hand) != 0:
             del self.hand[0]
 
+    def shuffle(self):
+        print("yes")
+        self.lis1 = []
+        self.lis2 = []
+        self.lis3 = []
+        self.lis4 = []
+        self.textfile = open("Cards.txt", "r")
+        for x in self.textfile:
+            x = x.strip()
+            x = x.split(",")
+            self.lis1.append(card(x[0], x[1], x[2]))
+            self.lis2.append(card(x[0], x[1], x[2]))
+            self.lis3.append(card(x[0], x[1], x[2]))
+            self.lis4.append(card(x[0], x[1], x[2]))

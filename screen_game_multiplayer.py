@@ -2,8 +2,7 @@ from tkinter import *
 from Blackjackinteractions import Player
 
 '''TO DO:
-For some reason players 3 and 4 do not start with cards in their hands. Not sure if only the picture is no appearing or
-if it is the card objects as well.
+shuffle
 '''
 class ScreenGameMultiplayer(Frame):
     def __init__(self,master):
