@@ -1,14 +1,9 @@
 from tkinter import *
-import time
 from Blackjackinteractions import Player
 
 '''TO DO:
-Screen Game is currently hard coded to be fixated on turns of only two players. If this is to be fixed, the easiest 
-solution would likely be changing any part of the code that relies on self.turn being < 3 to being < the number of 
-players, which can be added as an additional attribute of init. Obviously, the goal is to only have up to 4 players,
-but hard coding two more players would likely take more time than just allowing for a potentially infinite amount. 
-Additionally, Interactions will need to have a way to end the game and display final scores if the deck of cards gets
-down to 1, or a way to refill each player's hand once they drop to a certain point. 
+For some reason players 3 and 4 do not start with cards in their hands. Not sure if only the picture is no appearing or
+if it is the card objects as well.
 '''
 class ScreenGameMultiplayer(Frame):
     def __init__(self,master):
@@ -93,8 +88,13 @@ class ScreenGameMultiplayer(Frame):
                 self.clear_board()
                 self.cleared = True
                 self.turn_switch(self.turn)
+                self.start = Button(self, text="Player " + str(self.turn) + " start turn", bg="yellow",
+                                    command=self.begin,
+                                    font=("Arial", 30, "bold"))
+                self.start.grid(row=5, column=6)
                 self.h.destroy()
                 self.s.destroy()
+                #possibly implement start button like is in player 1 bust
 
         elif self.turn == 3:
             self.player3.getRandomCard()
@@ -120,6 +120,10 @@ class ScreenGameMultiplayer(Frame):
                 self.clear_board()
                 self.cleared = True
                 self.turn_switch(self.turn)
+                self.start = Button(self, text="Player " + str(self.turn) + " start turn", bg="magenta",
+                                    command=self.begin,
+                                    font=("Arial", 30, "bold"))
+                self.start.grid(row=5, column=6)
                 self.h.destroy()
                 self.s.destroy()
 
@@ -180,12 +184,12 @@ class ScreenGameMultiplayer(Frame):
             if len(self.player3.p_hand) > 0:
                 for x in range(len(self.player3.p_hand)):
                     self.player3.p_hand[x].destroy()
-                for x in range(len(self.player3.p_hand)):
+                for x in self.player3.p_hand:
                     self.player3.p_hand.remove(x)
             if len(self.player4.p_hand) > 0:
                 for x in range(len(self.player4.p_hand)):
                     self.player4.p_hand[x].destroy()
-                for x in range(len(self.player4.p_hand)):
+                for x in self.player4.p_hand:
                     self.player4.p_hand.remove(x)
             self.cleared = True
         else:
@@ -713,6 +717,8 @@ class ScreenGameMultiplayer(Frame):
             if self.turn == 1:
                 self.switch["text"] = None
         if self.turn == 1:
+            self.switch = Label(self, text=("Turn: Player " + str(self.turn)), font=("Times",16))
+            self.switch.grid(row=11, column=7, sticky=N)
             self.rounds += 1
             for f in self.player1.hand:
                 self.player1.hand.remove(f)
@@ -742,6 +748,7 @@ class ScreenGameMultiplayer(Frame):
                 self.x = True
                 self.blackjack = Button(self,text="Player 1 Blackjack",bg="indian red",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
+
         elif self.turn == 2:
             if not self.cleared:
                 self.clear_board()
@@ -766,12 +773,6 @@ class ScreenGameMultiplayer(Frame):
                 self.x = True
                 self.blackjack = Button(self,text="Player 2 Blackjack",bg="sky blue",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
-        self.start.destroy()
-        if not self.x:
-            self.h = Button(self,text="Hit",command=self.Hit)
-            self.h.grid(row=2,column=14,sticky=E)
-            self.s = Button(self,text="Stay",command=self.stay)
-            self.s.grid(row=2,column=0,sticky=W)
 
         elif self.turn == 3:
             if not self.cleared:
@@ -797,12 +798,6 @@ class ScreenGameMultiplayer(Frame):
                 self.x = True
                 self.blackjack = Button(self,text="Player 3 Blackjack",bg="yellow",command=self.stay,font=("Arial",16,"bold"))
                 self.blackjack.grid(row=2,column=4,rowspan=2,columnspan=6)
-        self.start.destroy()
-        if not self.x:
-            self.h = Button(self,text="Hit",command=self.Hit)
-            self.h.grid(row=2,column=14,sticky=E)
-            self.s = Button(self,text="Stay",command=self.stay)
-            self.s.grid(row=2,column=0,sticky=W)
 
         elif self.turn == 4:
             if not self.cleared:
@@ -840,11 +835,11 @@ class ScreenGameMultiplayer(Frame):
         self.p1_wins.grid(row=0,column=3,sticky=N)
 
         self.p2_wins = Label(self,text="Player 2 wins:"+str(self.player2.win),bg="sky blue",font=("Times",14))
-        self.p2_wins.grid(row=0,column=6,sticky=N)
+        self.p2_wins.grid(row=0,column=5,sticky=N)
 
         self.p3_wins = Label(self, text="Player 3 wins:" + str(self.player3.win), bg="yellow", font=("Times", 14))
-        self.p3_wins.grid(row=0, column=9, sticky=N)
+        self.p3_wins.grid(row=0, column=7, sticky=N)
 
         self.p4_wins = Label(self, text="Player 4 wins:" + str(self.player4.win), bg="magenta", font=("Times", 14))
-        self.p4_wins.grid(row=0, column=12, sticky=N)
+        self.p4_wins.grid(row=0, column=9, sticky=N)
 
