@@ -29,10 +29,16 @@ class Screen_Manager(object):
         self.root.title("Blackjack!")
         self.currentScreen = ScreenGameMultiplayer(self.root)
 
+    def start_screen2(self):
+        self.currentScreen.destroy()
+        self.root.title("Main Menu")
+        self.currentScreen = Start(self.root, self.startup_screengame, self.startup_AIGame, self.startup_4Player,
+                                   self.creditscreen)
+
     def creditscreen(self):
         self.currentScreen.destroy()
         self.root.title("Credits")
-        self.currentScreen = Credit(self.root)
+        self.currentScreen = Credit(self.root,self.start_screen2)
 
 def main():
     game = Screen_Manager()
