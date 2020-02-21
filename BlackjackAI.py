@@ -127,13 +127,15 @@ class AIGame(Frame):
         self.p2_wins.grid(row=0, column=8, sticky=N)
 
     def round_end(self):
+        self.h.destroy()
+        self.s.destroy()
         if self.player1.bust:
             if self.AIPlayer.bust:
                 self.display_current = Label(self,text="Tie Round",bg="orchid2",font =14)
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.ties += 1
             else:
-                self.display_current = Label(self,text="AI Wins Round",bg="orchid2")
+                self.display_current = Label(self,text="AI Wins Round",bg="sky blue")
                 self.display_current.grid(row=13,column=7,sticky=S)
                 self.AIPlayer.win += 1
         elif self.AIPlayer.bust:
