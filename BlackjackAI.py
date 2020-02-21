@@ -1,6 +1,6 @@
 from tkinter import *
 from Blackjackinteractions import Player
-import time
+
 
 class AIGame(Frame):
     def __init__(self,master):

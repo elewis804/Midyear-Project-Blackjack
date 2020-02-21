@@ -27,13 +27,6 @@ class Player(object):
             self.lis4.append(card(x[0],x[1],x[2]))
 
     def getRandomCard(self,startup=False):
-        '''
-        print("Score at beginning of get_random: ",self.score)
-        if len(self.hand) > 1:
-            print("Hand at beginning of get_random: ",end="  ")
-            for h in self.hand:
-                print(h.name)
-        '''
         avail = len(self.lis1) + len(self.lis2) + len(self.lis3) + len(self.lis4) - 4
         lis = random.randint(0,avail)
         if lis <= len(self.lis1) - 1:

@@ -1,10 +1,6 @@
 from tkinter import *
-import time
 from Blackjackinteractions import Player
 
-'''TO DO:
-make shuffle button
-'''
 class ScreenGame(Frame):
     def __init__(self,master):
         super().__init__(master)
@@ -25,7 +21,6 @@ class ScreenGame(Frame):
         w.grid(row=0, column=0, rowspan=15,columnspan=15)
         self.start = Button(self,text="Player " + str(self.turn) + "Start turn",command=self.begin,bg = "indian red",font=("Arial",30,"bold"))
         self.start.grid(row=5,column=6)
-
 
 
     def Hit(self):

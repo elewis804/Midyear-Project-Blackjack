@@ -1,9 +1,7 @@
 from tkinter import *
 from Blackjackinteractions import Player
 
-'''TO DO:
-shuffle
-'''
+
 class ScreenGameMultiplayer(Frame):
     def __init__(self,master):
         super().__init__(master)
